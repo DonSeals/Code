@@ -1,0 +1,32 @@
+#include <iostream>
+#include <vector>
+
+std::vector<int> add_binary_integers(const std::vector<int>& A, const std::vector<int>& B, int n) {
+    std::vector<int> C(n + 1, 0);  // Initialize array C with zeros of length n+1
+    int carry = 0;  // Initialize carry to 0
+
+    for (int i = 0; i < n; ++i) {
+        // Calculate the sum of corresponding bits and the carry
+        int sum = A[i] + B[i] + carry;
+        C[i] = sum % 2;  // Store the bit result in C
+        carry = sum / 2;  // Update the carry
+    }
+
+    C[n] = carry;  // Store the final carry in the last element of C
+    return C;
+}
+
+int main() {
+    std::vector<int> A = {1, 0, 1};  // Example binary number (5 in decimal)
+    std::vector<int> B = {1, 1, 1};  // Example binary number (7 in decimal)
+    int n = 3;
+    std::vector<int> C = add_binary_integers(A, B, n);
+
+    std::cout << "Resultant binary sum array: ";
+    for (int bit : C) {
+        std::cout << bit << " ";
+    }
+    std::cout << std::endl;  // Output should be 0 0 1 1 which represents 12 in decimal
+
+    return 0;
+}
